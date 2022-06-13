@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PinCodeLayout">
+        <attr name="dotFilledIcon" format="reference" />
+        <attr name="dotEmptyIcon" format="reference" />
+        <attr name="buttonsMargin" format="dimension" />
+        <attr name="buttonsSize" format="dimension" />
+        <attr name="buttonsTextSize" format="dimension" />
+        <attr name="resetText" format="string|reference" />
+        <attr name="backspaceIcon" format="reference" />
+        <attr name="backspaceIconSize" format="dimension" />
+        <attr name="buttonsColor" format="integer" />
+    </declare-styleable>
+</resources>

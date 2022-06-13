@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">PinCodeScreen</string>
+
+    <string name="one_digit" translatable="false">1</string>
+    <string name="two_digit" translatable="false">2</string>
+    <string name="three_digit" translatable="false">3</string>
+    <string name="four_digit" translatable="false">4</string>
+    <string name="five_digit" translatable="false">5</string>
+    <string name="six_digit" translatable="false">6</string>
+    <string name="seven_digit" translatable="false">7</string>
+    <string name="eight_digit" translatable="false">8</string>
+    <string name="nine_digit" translatable="false">9</string>
+    <string name="zero_digit" translatable="false">0</string>
+    <string name="clear">Reset</string>
+    <string name="cancel">Cancel</string>
+    <string name="reset_pin_code_warning"> You are about to reset your code. Are you sure?</string>
+    <string name="attention">Attention!</string>
+    <string name="enter_pin">Enter code</string>
+</resources>

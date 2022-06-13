@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/pin_code_parent_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="8dp">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/dots_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="24dp"
+        app:layout_constraintEnd_toEndOf="@id/pin_digits_btn_three"
+        app:layout_constraintStart_toStartOf="@id/pin_digits_btn_one"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/dot_line_first_dot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:padding="2dp"
+            app:srcCompat="@drawable/vector_pin_empty_dot" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/dot_line_second_dot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:padding="2dp"
+            app:srcCompat="@drawable/vector_pin_empty_dot" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/dot_line_third_dot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:padding="2dp"
+            app:srcCompat="@drawable/vector_pin_empty_dot" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/dot_line_fourth_dot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:padding="2dp"
+            app:srcCompat="@drawable/vector_pin_empty_dot" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/dot_line_fifth_dot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:padding="2dp"
+            app:srcCompat="@drawable/vector_pin_empty_dot" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/dot_line_sixth_dot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:padding="2dp"
+            app:srcCompat="@drawable/vector_pin_empty_dot" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pin_digits_btn_one"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_margin="4dp"
+        android:background="@drawable/round_button_shape"
+        android:text="@string/one_digit"
+        android:textColor="#000000"
+        android:stateListAnimator="@null"
+        android:textSize="26sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dots_layout" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pin_digits_btn_two"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_margin="4dp"
+        android:background="@drawable/round_button_shape"
+        android:stateListAnimator="@null"
+        android:text="@string/two_digit"
+        android:textColor="#000000"
+        android:textSize="26sp"
+        app:layout_constraintStart_toEndOf="@id/pin_digits_btn_one"
+        app:layout_constraintTop_toBottomOf="@id/dots_layout" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pin_digits_btn_three"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_margin="4dp"
+        android:stateListAnimator="@null"
+        android:background="@drawable/round_button_shape"
+        android:text="@string/three_digit"
+        android:textColor="#000000"
+        android:textSize="26sp"
+        app:layout_constraintStart_toEndOf="@id/pin_digits_btn_two"
+        app:layout_constraintTop_toBottomOf="@id/dots_layout" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pin_digits_btn_four"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_margin="4dp"
+        android:stateListAnimator="@null"
+        android:background="@drawable/round_button_shape"
+        android:text="@string/four_digit"
+        android:textColor="#000000"
+        android:textSize="26sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pin_digits_btn_one" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pin_digits_btn_five"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_margin="4dp"
+        android:stateListAnimator="@null"
+        android:background="@drawable/round_button_shape"
+        android:text="@string/five_digit"
+        android:textColor="#000000"
+        android:textSize="26sp"
+        app:layout_constraintStart_toEndOf="@id/pin_digits_btn_four"
+        app:layout_constraintTop_toBottomOf="@id/pin_digits_btn_two" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pin_digits_btn_six"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_margin="4dp"
+        android:stateListAnimator="@null"
+        android:background="@drawable/round_button_shape"
+        android:text="@string/six_digit"
+        android:textColor="#000000"
+        android:textSize="26sp"
+        app:layout_constraintStart_toEndOf="@id/pin_digits_btn_five"
+        app:layout_constraintTop_toBottomOf="@id/pin_digits_btn_three" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pin_digits_btn_seven"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_margin="4dp"
+        android:stateListAnimator="@null"
+        android:background="@drawable/round_button_shape"
+        android:text="@string/seven_digit"
+        android:textColor="#000000"
+        android:textSize="26sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pin_digits_btn_four" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pin_digits_btn_eight"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_margin="4dp"
+        android:stateListAnimator="@null"
+        android:background="@drawable/round_button_shape"
+        android:text="@string/eight_digit"
+        android:textColor="#000000"
+        android:textSize="26sp"
+        app:layout_constraintStart_toEndOf="@id/pin_digits_btn_seven"
+        app:layout_constraintTop_toBottomOf="@id/pin_digits_btn_five" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pin_digits_btn_nine"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_margin="@dimen/buttons_margin"
+        android:background="@drawable/round_button_shape"
+        android:text="@string/nine_digit"
+        android:textColor="#000000"
+        android:textSize="26sp"
+        android:stateListAnimator="@null"
+        app:layout_constraintStart_toEndOf="@id/pin_digits_btn_eight"
+        app:layout_constraintTop_toBottomOf="@id/pin_digits_btn_six" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pin_digits_btn_reset"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_margin="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/round_button_shape"
+        android:gravity="center"
+        android:padding="4dp"
+        android:text="@string/clear"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        android:textAllCaps="false"
+        android:stateListAnimator="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pin_digits_btn_seven" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pin_digits_btn_zero"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_margin="4dp"
+        android:background="@drawable/round_button_shape"
+        android:text="@string/zero_digit"
+        android:textColor="#000000"
+        android:textSize="26sp"
+        android:stateListAnimator="@null"
+        app:layout_constraintStart_toEndOf="@id/pin_digits_btn_seven"
+        app:layout_constraintTop_toBottomOf="@id/pin_digits_btn_eight" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pin_digits_btn_backspace"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_margin="4dp"
+        android:stateListAnimator="@null"
+        android:background="@drawable/round_button_shape"
+        app:layout_constraintStart_toEndOf="@id/pin_digits_btn_zero"
+        app:layout_constraintTop_toBottomOf="@id/pin_digits_btn_nine"
+        android:drawableStart="@drawable/vector_backspace"
+        android:paddingStart="20dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

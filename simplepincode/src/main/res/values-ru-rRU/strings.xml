@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PinCodeScreen</string>
+    <string name="clear">Сбросить</string>
+    <string name="cancel">Отмена</string>
+    <string name="reset_pin_code_warning">Вы собираетесь сбросить пин-код. Вы уверены?</string>
+    <string name="attention">Внимание!</string>
+    <string name="enter_pin">Введите код</string>
+</resources>
