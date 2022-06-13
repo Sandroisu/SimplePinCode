@@ -3,9 +3,35 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+ext {
+    PUBLISH_GROUP_ID = 'io.github.sandroisu'
+    PUBLISH_VERSION = '1.0.0'
+    PUBLISH_ARTIFACT_ID = 'simplepincode'
+    PUBLISH_DESCRIPTION = 'SimplePinCode Android SDK'
+    PUBLISH_URL = 'https://github.com/Sandroisu/SimplePinCode'
+    PUBLISH_LICENSE_NAME = 'Apache License'
+    PUBLISH_LICENSE_URL =
+            'https://github.com/Sandroisu/SimplePinCode/blob/master/LICENSE'
+    PUBLISH_DEVELOPER_ID = 'Sandroisu'
+    PUBLISH_DEVELOPER_NAME = 'Aleksandr'
+    PUBLISH_DEVELOPER_EMAIL = 'sandroisu1411@gmail.com'
+    PUBLISH_SCM_CONNECTION =
+            'scm:git:github.com/Sandroisu/SimplePinCode.git'
+    PUBLISH_SCM_DEVELOPER_CONNECTION =
+            'scm:git:ssh://github.com/Sandroisu/SimplePinCode.git'
+    PUBLISH_SCM_URL =
+            'https://github.com/Sandroisu/SimplePinCode/tree/master'
+}
+
+apply from: "${rootProject.projectDir}/scripts/publish-module.gradle"
+
 android {
     compileSdk 32
-
+    publishing {
+        singleVariant('release') {
+            withSourcesJar()
+        }
+    }
     defaultConfig {
         minSdk 16
         targetSdk 32
