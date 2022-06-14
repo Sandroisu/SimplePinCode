@@ -3,4 +3,5 @@
     <dimen name="buttons_margin">4dp</dimen>
     <dimen name="buttons_size">64dp</dimen>
     <dimen name="buttons_text_size">26sp</dimen>
+    <dimen name="dots_size">24dp</dimen>
 </resources>

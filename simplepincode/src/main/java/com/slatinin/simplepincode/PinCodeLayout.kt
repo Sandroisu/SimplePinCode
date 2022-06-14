@@ -6,6 +6,9 @@ import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.DialogInterface
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.VibrationEffect
@@ -47,14 +50,15 @@ class PinCodeLayout : LinearLayoutCompat {
     var sixthDot: AppCompatImageView
     val parentLayout: ConstraintLayout
 
-    val buttonsList: ArrayList<AppCompatButton> = ArrayList();
+    val buttonsList: ArrayList<AppCompatButton> = ArrayList()
+    val dotsList: ArrayList<AppCompatImageView> = ArrayList()
 
     private var maxDotCount = 4
     var currentDotsFilled = 0
     var emptyDotDrawable: Drawable? = null
     var filledDotDrawable: Drawable? = null
 
-    var callback: com.slatinin.simplepincode.PinCodeDigitsCallback? = null
+    var callback: PinCodeDigitsCallback? = null
     var resetPinListener: ResetPinListener? = null
     var backSpaceDrawable: Drawable? = null
 
@@ -83,6 +87,13 @@ class PinCodeLayout : LinearLayoutCompat {
         buttonReset = findViewById(R.id.pin_digits_btn_reset)
         buttonZero = findViewById(R.id.pin_digits_btn_zero)
         buttonBackspace = findViewById(R.id.pin_digits_btn_backspace)
+
+        dotsList.add(firstDot)
+        dotsList.add(secondDot)
+        dotsList.add(thirdDot)
+        dotsList.add(fourthDot)
+        dotsList.add(fifthDot)
+        dotsList.add(sixthDot)
 
         buttonsList.add(buttonOne)
         buttonsList.add(buttonTwo)
@@ -163,6 +174,7 @@ class PinCodeLayout : LinearLayoutCompat {
         fourthDot = findViewById(R.id.dot_line_fourth_dot)
         fifthDot = findViewById(R.id.dot_line_fifth_dot)
         sixthDot = findViewById(R.id.dot_line_sixth_dot)
+
         dotLayout = findViewById(R.id.dots_layout)
         buttonOne = findViewById(R.id.pin_digits_btn_one)
         buttonTwo = findViewById(R.id.pin_digits_btn_two)
@@ -176,6 +188,13 @@ class PinCodeLayout : LinearLayoutCompat {
         buttonReset = findViewById(R.id.pin_digits_btn_reset)
         buttonZero = findViewById(R.id.pin_digits_btn_zero)
         buttonBackspace = findViewById(R.id.pin_digits_btn_backspace)
+
+        dotsList.add(firstDot)
+        dotsList.add(secondDot)
+        dotsList.add(thirdDot)
+        dotsList.add(fourthDot)
+        dotsList.add(fifthDot)
+        dotsList.add(sixthDot)
 
         buttonsList.add(buttonOne)
         buttonsList.add(buttonTwo)
@@ -200,6 +219,7 @@ class PinCodeLayout : LinearLayoutCompat {
             val customEmptyDot = a.getDrawable(R.styleable.PinCodeLayout_dotEmptyIcon)
             customEmptyDot?.let {
                 emptyDotDrawable = it
+                setEmptyDotIcon(it)
             }
         }
         filledDotDrawable =
@@ -236,16 +256,32 @@ class PinCodeLayout : LinearLayoutCompat {
             val customBackspaceDot = a.getDrawable(R.styleable.PinCodeLayout_backspaceIcon)
             customBackspaceDot?.let {
                 backSpaceDrawable = it
-                setBackspaceIcon(it)
+                setBackspaceIcon(it, buttonsSize)
             }
+        }
+        if (a.hasValue(R.styleable.PinCodeLayout_buttonsColor)) {
+            val buttonsColor = a.getColor(R.styleable.PinCodeLayout_buttonsColor, Color.TRANSPARENT)
+            setButtonsBackground(buttonsColor)
         }
 
-        if (a.hasValue(R.styleable.PinCodeLayout_backspaceIconSize)) {
-            val text = a.getString(R.styleable.PinCodeLayout_backspaceIconSize)
-            text?.let {
-                setResetText(it)
-            }
+        if (a.hasValue(R.styleable.PinCodeLayout_buttonsTextColor)) {
+            val buttonsTextColor =
+                a.getColor(R.styleable.PinCodeLayout_buttonsTextColor, Color.BLACK)
+            setButtonsTextColor(buttonsTextColor)
         }
+
+        if (a.hasValue(R.styleable.PinCodeLayout_dotsSize)) {
+            val defaultDotsSize = resources.getDimensionPixelSize(R.dimen.dots_size)
+            val dotSize = a.getDimensionPixelSize(R.styleable.PinCodeLayout_dotsSize, defaultDotsSize)
+            setDotsSize(dotSize)
+        }
+
+        if (a.hasValue(R.styleable.PinCodeLayout_dotsColor)) {
+            val dotsColor =
+                a.getColor(R.styleable.PinCodeLayout_dotsColor, Color.BLACK)
+            setDotsColor(dotsColor)
+        }
+
         a.recycle()
 
         setButtonsMargin(margin)
@@ -306,10 +342,79 @@ class PinCodeLayout : LinearLayoutCompat {
 
     }
 
+    private fun setDotsColor(dotsColor: Int) {
+        emptyDotDrawable?.let {
+            val porterDuffColorFilter = PorterDuffColorFilter(
+                dotsColor,
+                PorterDuff.Mode.SRC_ATOP
+            )
 
-    fun setBackspaceIcon(drawable: Drawable) {
-        buttonBackspace.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-        val buttonSize = buttonBackspace.measuredWidth
+            it.colorFilter = porterDuffColorFilter
+        }
+        filledDotDrawable?.let {
+            val porterDuffColorFilter = PorterDuffColorFilter(
+                dotsColor,
+                PorterDuff.Mode.SRC_ATOP
+            )
+
+            it.colorFilter = porterDuffColorFilter
+        }
+
+    }
+
+    private fun setDotsSize(dotSize: Int) {
+        for(dot in dotsList){
+            dot.layoutParams.width = dotSize
+            dot.layoutParams.height = dotSize
+        }
+    }
+
+    private fun setEmptyDotIcon(dotIcon: Drawable) {
+        for(dot in dotsList){
+            dot.setImageDrawable(dotIcon)
+        }
+
+    }
+
+    private fun setButtonsTextColor(buttonsTextColor: Int) {
+        for (button in buttonsList) {
+            if (button.id == R.id.pin_digits_btn_backspace) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                    for (drawable in button.compoundDrawablesRelative) {
+                        drawable?.let {
+                            val porterDuffColorFilter = PorterDuffColorFilter(
+                                buttonsTextColor,
+                                PorterDuff.Mode.SRC_ATOP
+                            )
+
+                            it.colorFilter = porterDuffColorFilter
+                        }
+                    }
+                } else {
+                    for (drawable in button.compoundDrawables) {
+                        drawable?.let {
+                            val porterDuffColorFilter = PorterDuffColorFilter(
+                                buttonsTextColor,
+                                PorterDuff.Mode.SRC_ATOP
+                            )
+
+                            it.colorFilter = porterDuffColorFilter
+                        }
+                    }
+                }
+            }
+            button.setTextColor(buttonsTextColor)
+        }
+    }
+
+    private fun setButtonsBackground(buttonsColor: Int) {
+        for (button in buttonsList) {
+            button.setBackgroundColor(buttonsColor)
+        }
+    }
+
+
+    fun setBackspaceIcon(drawable: Drawable, buttonSize: Int) {
         val drawableSize = drawable.intrinsicWidth
         if (buttonSize < drawableSize) {
             return
@@ -321,7 +426,11 @@ class PinCodeLayout : LinearLayoutCompat {
             buttonBackspace.paddingRight,
             buttonBackspace.paddingBottom
         )
-        buttonBackspace.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            buttonBackspace.setCompoundDrawablesRelativeWithIntrinsicBounds(drawable, null, null, null)
+        } else {
+            buttonBackspace.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+        }
     }
 
 
@@ -365,7 +474,7 @@ class PinCodeLayout : LinearLayoutCompat {
         }
     }
 
-    fun setDigitCallback(callback: com.slatinin.simplepincode.PinCodeDigitsCallback) {
+    fun setDigitCallback(callback: PinCodeDigitsCallback) {
         this.callback = callback
     }
 
@@ -461,7 +570,12 @@ class PinCodeLayout : LinearLayoutCompat {
             } else {
                 val v = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE))
+                    v.vibrate(
+                        VibrationEffect.createOneShot(
+                            500,
+                            VibrationEffect.DEFAULT_AMPLITUDE
+                        )
+                    )
                 } else {
                     v.vibrate(500)
                 }

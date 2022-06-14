@@ -48,8 +48,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            app:backspaceIcon="@drawable/vector_pin_empty_dot"
-            app:dotEmptyIcon="@drawable/vector_backspace"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

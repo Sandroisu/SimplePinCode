@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/pin_code_parent_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/transparent"
     android:orientation="vertical"
     android:paddingBottom="8dp">
 
@@ -84,9 +84,8 @@
         android:layout_height="64dp"
         android:layout_margin="4dp"
         android:background="@drawable/round_button_shape"
+        android:gravity="center"
         android:text="@string/one_digit"
-        android:textColor="#000000"
-        android:stateListAnimator="@null"
         android:textSize="26sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dots_layout" />
@@ -97,9 +96,8 @@
         android:layout_height="64dp"
         android:layout_margin="4dp"
         android:background="@drawable/round_button_shape"
-        android:stateListAnimator="@null"
+        android:gravity="center"
         android:text="@string/two_digit"
-        android:textColor="#000000"
         android:textSize="26sp"
         app:layout_constraintStart_toEndOf="@id/pin_digits_btn_one"
         app:layout_constraintTop_toBottomOf="@id/dots_layout" />
@@ -109,10 +107,9 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_margin="4dp"
-        android:stateListAnimator="@null"
         android:background="@drawable/round_button_shape"
+        android:gravity="center"
         android:text="@string/three_digit"
-        android:textColor="#000000"
         android:textSize="26sp"
         app:layout_constraintStart_toEndOf="@id/pin_digits_btn_two"
         app:layout_constraintTop_toBottomOf="@id/dots_layout" />
@@ -122,10 +119,9 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_margin="4dp"
-        android:stateListAnimator="@null"
         android:background="@drawable/round_button_shape"
+        android:gravity="center"
         android:text="@string/four_digit"
-        android:textColor="#000000"
         android:textSize="26sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/pin_digits_btn_one" />
@@ -135,10 +131,9 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_margin="4dp"
-        android:stateListAnimator="@null"
         android:background="@drawable/round_button_shape"
+        android:gravity="center"
         android:text="@string/five_digit"
-        android:textColor="#000000"
         android:textSize="26sp"
         app:layout_constraintStart_toEndOf="@id/pin_digits_btn_four"
         app:layout_constraintTop_toBottomOf="@id/pin_digits_btn_two" />
@@ -148,10 +143,9 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_margin="4dp"
-        android:stateListAnimator="@null"
         android:background="@drawable/round_button_shape"
+        android:gravity="center"
         android:text="@string/six_digit"
-        android:textColor="#000000"
         android:textSize="26sp"
         app:layout_constraintStart_toEndOf="@id/pin_digits_btn_five"
         app:layout_constraintTop_toBottomOf="@id/pin_digits_btn_three" />
@@ -161,10 +155,9 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_margin="4dp"
-        android:stateListAnimator="@null"
         android:background="@drawable/round_button_shape"
+        android:gravity="center"
         android:text="@string/seven_digit"
-        android:textColor="#000000"
         android:textSize="26sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/pin_digits_btn_four" />
@@ -174,10 +167,9 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_margin="4dp"
-        android:stateListAnimator="@null"
         android:background="@drawable/round_button_shape"
+        android:gravity="center"
         android:text="@string/eight_digit"
-        android:textColor="#000000"
         android:textSize="26sp"
         app:layout_constraintStart_toEndOf="@id/pin_digits_btn_seven"
         app:layout_constraintTop_toBottomOf="@id/pin_digits_btn_five" />
@@ -188,10 +180,9 @@
         android:layout_height="64dp"
         android:layout_margin="@dimen/buttons_margin"
         android:background="@drawable/round_button_shape"
+        android:gravity="center"
         android:text="@string/nine_digit"
-        android:textColor="#000000"
         android:textSize="26sp"
-        android:stateListAnimator="@null"
         app:layout_constraintStart_toEndOf="@id/pin_digits_btn_eight"
         app:layout_constraintTop_toBottomOf="@id/pin_digits_btn_six" />
 
@@ -206,10 +197,8 @@
         android:gravity="center"
         android:padding="4dp"
         android:text="@string/clear"
-        android:textColor="#000000"
-        android:textSize="12sp"
         android:textAllCaps="false"
-        android:stateListAnimator="@null"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/pin_digits_btn_seven" />
 
@@ -219,10 +208,9 @@
         android:layout_height="64dp"
         android:layout_margin="4dp"
         android:background="@drawable/round_button_shape"
+        android:gravity="center"
         android:text="@string/zero_digit"
-        android:textColor="#000000"
         android:textSize="26sp"
-        android:stateListAnimator="@null"
         app:layout_constraintStart_toEndOf="@id/pin_digits_btn_seven"
         app:layout_constraintTop_toBottomOf="@id/pin_digits_btn_eight" />
 
@@ -231,12 +219,12 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_margin="4dp"
-        android:stateListAnimator="@null"
         android:background="@drawable/round_button_shape"
-        app:layout_constraintStart_toEndOf="@id/pin_digits_btn_zero"
-        app:layout_constraintTop_toBottomOf="@id/pin_digits_btn_nine"
         android:drawableStart="@drawable/vector_backspace"
-        android:paddingStart="20dp"/>
+        android:paddingStart="20dp"
+        android:stateListAnimator="@null"
+        app:layout_constraintStart_toEndOf="@id/pin_digits_btn_zero"
+        app:layout_constraintTop_toBottomOf="@id/pin_digits_btn_nine" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
