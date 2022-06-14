@@ -10,7 +10,7 @@ class CodeFragment : PinCodeFragment(){
     }
 
     override fun getSavedPinCode(): String {
-        return "22222"
+        return "222222"
     }
 
     override fun onCodeMatch(existPinCodeResult: ExistPinCodeResult) {
@@ -23,6 +23,6 @@ class CodeFragment : PinCodeFragment(){
     }
 
     override fun getMaxPinLength(): Int {
-        return 5
+        return 6
     }
 }

@@ -11,7 +11,7 @@ class PinCodeViewModelFactory(private val isCreate: Boolean, private val maxCode
         if (maxCodeLength > 6 || maxCodeLength < 3) {
             throw Exception("Max length of pin code must be between 3 and 6")
         }
-        return com.slatinin.simplepincode.PinCodeViewModel(
+        return PinCodeViewModel(
             isCreate = isCreate,
             maxCodeLength = maxCodeLength
         ) as T
