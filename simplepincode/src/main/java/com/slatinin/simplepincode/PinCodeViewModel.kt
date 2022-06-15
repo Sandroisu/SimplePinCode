@@ -4,14 +4,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class PinCodeViewModel(val isCreate: Boolean, val maxCodeLength: Int) : ViewModel() {
-    var pinCode: String = ""
-    var tempPin: String = ""
+    var pinCode: String
+    var tempPin: String
+    init {
+        pinCode = ""
+        tempPin = ""
+    }
 
-    private var pinCodeLiveData: MutableLiveData<com.slatinin.simplepincode.PinCodeResult> = MutableLiveData<com.slatinin.simplepincode.PinCodeResult>()
-    private var clearDigitLiveData: MutableLiveData<com.slatinin.simplepincode.PinCodeResult> =
-        MutableLiveData<com.slatinin.simplepincode.PinCodeResult>()
 
-    fun refreshPinCode(digit: String): MutableLiveData<com.slatinin.simplepincode.PinCodeResult> {
+    private var pinCodeLiveData: MutableLiveData<PinCodeResult> = MutableLiveData<PinCodeResult>()
+    private var clearDigitLiveData: MutableLiveData<PinCodeResult> =
+        MutableLiveData<PinCodeResult>()
+
+    fun refreshPinCode(digit: String): MutableLiveData<PinCodeResult> {
 
         if (isCreate) {
             pinCode += digit
@@ -19,21 +24,19 @@ class PinCodeViewModel(val isCreate: Boolean, val maxCodeLength: Int) : ViewMode
                 pinCode = pinCode.substring(0, maxCodeLength)
             }
             if (pinCode.length != maxCodeLength) {
-                pinCodeLiveData.setValue(
-                    com.slatinin.simplepincode.NewPinCodeResult(
-                        pinCode,
-                        tempPin,
-                        pinCode.length - 1,
-                        maxCodeLength
-                    )
+                pinCodeLiveData.value = NewPinCodeResult(
+                    pinCode,
+                    tempPin,
+                    pinCode.length - 1,
+                    maxCodeLength
                 )
                 return pinCodeLiveData
             }
             if (tempPin.isEmpty()) {
                 tempPin = pinCode
                 pinCode = ""
-                pinCodeLiveData.setValue(
-                    com.slatinin.simplepincode.NewPinCodeResult(
+                pinCodeLiveData.value = (
+                    NewPinCodeResult(
                         pinCode,
                         tempPin,
                         maxCodeLength,
@@ -42,8 +45,8 @@ class PinCodeViewModel(val isCreate: Boolean, val maxCodeLength: Int) : ViewMode
                 )
             } else {
                 if (tempPin == pinCode) {
-                    pinCodeLiveData.setValue(
-                        com.slatinin.simplepincode.NewPinCodeResult(
+                    pinCodeLiveData.value = (
+                        NewPinCodeResult(
                             pinCode,
                             tempPin,
                             maxCodeLength,
@@ -51,13 +54,11 @@ class PinCodeViewModel(val isCreate: Boolean, val maxCodeLength: Int) : ViewMode
                         )
                     )
                 } else {
-                    pinCodeLiveData.setValue(
-                        com.slatinin.simplepincode.NewPinCodeResult(
-                            pinCode,
-                            tempPin,
-                            maxCodeLength,
-                            maxCodeLength
-                        )
+                    pinCodeLiveData.value = NewPinCodeResult(
+                        pinCode,
+                        tempPin,
+                        maxCodeLength,
+                        maxCodeLength
                     )
                     tempPin = ""
                     pinCode = ""
@@ -67,11 +68,9 @@ class PinCodeViewModel(val isCreate: Boolean, val maxCodeLength: Int) : ViewMode
             if (pinCode.length < maxCodeLength) {
                 pinCode += digit
             }
-            pinCodeLiveData.setValue(
-                com.slatinin.simplepincode.ExistPinCodeResult(
-                    pinCode,
-                    maxCodeLength
-                )
+            pinCodeLiveData.value = ExistPinCodeResult(
+                pinCode,
+                maxCodeLength
             )
             if (pinCode.length == maxCodeLength) {
                 pinCode = ""
@@ -80,15 +79,15 @@ class PinCodeViewModel(val isCreate: Boolean, val maxCodeLength: Int) : ViewMode
         return pinCodeLiveData
     }
 
-    fun clearOneDigit(): MutableLiveData<com.slatinin.simplepincode.PinCodeResult> {
+    fun clearOneDigit(): MutableLiveData<PinCodeResult> {
         pinCode = if (pinCode.length > 1) {
             pinCode.substring(0, pinCode.length - 1)
         } else {
             ""
         }
         if (isCreate) {
-            clearDigitLiveData.setValue(
-                com.slatinin.simplepincode.NewPinCodeResult(
+            clearDigitLiveData.value = (
+                NewPinCodeResult(
                     pinCode,
                     tempPin,
                     pinCode.length + 1,
@@ -96,8 +95,8 @@ class PinCodeViewModel(val isCreate: Boolean, val maxCodeLength: Int) : ViewMode
                 )
             )
         } else {
-            clearDigitLiveData.setValue(
-                com.slatinin.simplepincode.ExistPinCodeResult(
+            clearDigitLiveData.value = (
+                ExistPinCodeResult(
                     pinCode,
                     maxCodeLength
                 )

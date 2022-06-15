@@ -8,9 +8,10 @@
         <attr name="buttonsTextSize" format="dimension" />
         <attr name="resetText" format="string|reference" />
         <attr name="backspaceIcon" format="reference" />
-        <attr name="buttonsColor" format="color|reference" />
+        <attr name="buttonsBackground" format="color|reference" />
         <attr name="buttonsTextColor" format="color|reference" />
         <attr name="dotsSize" format="dimension" />
         <attr name="dotsColor" format="color|reference" />
+        <attr name="rippleColor" format="color|reference" />
     </declare-styleable>
 </resources>

@@ -6,10 +6,14 @@ import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.DialogInterface
 import android.content.pm.PackageManager
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.RippleDrawable
+import android.graphics.drawable.StateListDrawable
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
@@ -59,7 +63,6 @@ class PinCodeLayout : LinearLayoutCompat {
     var filledDotDrawable: Drawable? = null
 
     var callback: PinCodeDigitsCallback? = null
-    var resetPinListener: ResetPinListener? = null
     var backSpaceDrawable: Drawable? = null
 
     constructor(context: Context) : super(context) {
@@ -136,10 +139,7 @@ class PinCodeLayout : LinearLayoutCompat {
             callback?.onDigitEntered(context.getString(R.string.nine_digit))
         }
         buttonReset.setOnClickListener {
-            resetPinListener?.let {
-                it.onResetButtonClicked()
-                return@setOnClickListener
-            }
+
             val adb = AlertDialog.Builder(context)
             adb.setPositiveButton(
                 context.getString(R.string.clear)
@@ -259,9 +259,10 @@ class PinCodeLayout : LinearLayoutCompat {
                 setBackspaceIcon(it, buttonsSize)
             }
         }
-        if (a.hasValue(R.styleable.PinCodeLayout_buttonsColor)) {
-            val buttonsColor = a.getColor(R.styleable.PinCodeLayout_buttonsColor, Color.TRANSPARENT)
-            setButtonsBackground(buttonsColor)
+        if (a.hasValue(R.styleable.PinCodeLayout_buttonsBackground)) {
+            val buttonsColor =
+                a.getColor(R.styleable.PinCodeLayout_buttonsBackground, Color.TRANSPARENT)
+            setButtonsBackground(buttonsColor, Color.GRAY)
         }
 
         if (a.hasValue(R.styleable.PinCodeLayout_buttonsTextColor)) {
@@ -272,7 +273,8 @@ class PinCodeLayout : LinearLayoutCompat {
 
         if (a.hasValue(R.styleable.PinCodeLayout_dotsSize)) {
             val defaultDotsSize = resources.getDimensionPixelSize(R.dimen.dots_size)
-            val dotSize = a.getDimensionPixelSize(R.styleable.PinCodeLayout_dotsSize, defaultDotsSize)
+            val dotSize =
+                a.getDimensionPixelSize(R.styleable.PinCodeLayout_dotsSize, defaultDotsSize)
             setDotsSize(dotSize)
         }
 
@@ -280,6 +282,12 @@ class PinCodeLayout : LinearLayoutCompat {
             val dotsColor =
                 a.getColor(R.styleable.PinCodeLayout_dotsColor, Color.BLACK)
             setDotsColor(dotsColor)
+        }
+
+        if (a.hasValue(R.styleable.PinCodeLayout_rippleColor)) {
+            val rippleColor =
+                a.getColor(R.styleable.PinCodeLayout_rippleColor, Color.RED)
+            setRippleColor(rippleColor)
         }
 
         a.recycle()
@@ -316,10 +324,7 @@ class PinCodeLayout : LinearLayoutCompat {
             callback?.onDigitEntered(context.getString(R.string.nine_digit))
         }
         buttonReset.setOnClickListener {
-            resetPinListener?.let {
-                it.onResetButtonClicked()
-                return@setOnClickListener
-            }
+
             val adb = AlertDialog.Builder(context)
             adb.setPositiveButton(
                 context.getString(R.string.clear)
@@ -340,6 +345,20 @@ class PinCodeLayout : LinearLayoutCompat {
             callback?.onBackspacePressed()
         }
 
+    }
+
+    private fun setRippleColor(rippleColor: Int) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return
+        }
+        for (button in buttonsList) {
+
+            button.foreground = RippleDrawable(
+                ColorStateList.valueOf(rippleColor),
+                null,
+                ColorDrawable(Color.BLACK)
+            )
+        }
     }
 
     private fun setDotsColor(dotsColor: Int) {
@@ -363,14 +382,14 @@ class PinCodeLayout : LinearLayoutCompat {
     }
 
     private fun setDotsSize(dotSize: Int) {
-        for(dot in dotsList){
+        for (dot in dotsList) {
             dot.layoutParams.width = dotSize
             dot.layoutParams.height = dotSize
         }
     }
 
     private fun setEmptyDotIcon(dotIcon: Drawable) {
-        for(dot in dotsList){
+        for (dot in dotsList) {
             dot.setImageDrawable(dotIcon)
         }
 
@@ -407,9 +426,9 @@ class PinCodeLayout : LinearLayoutCompat {
         }
     }
 
-    private fun setButtonsBackground(buttonsColor: Int) {
+    private fun setButtonsBackground(buttonsColor: Int, pressedColor: Int) {
         for (button in buttonsList) {
-            button.setBackgroundColor(buttonsColor)
+            button.background = getPressedColorRippleDrawable(buttonsColor, pressedColor)
         }
     }
 
@@ -427,7 +446,12 @@ class PinCodeLayout : LinearLayoutCompat {
             buttonBackspace.paddingBottom
         )
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            buttonBackspace.setCompoundDrawablesRelativeWithIntrinsicBounds(drawable, null, null, null)
+            buttonBackspace.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                drawable,
+                null,
+                null,
+                null
+            )
         } else {
             buttonBackspace.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
         }
@@ -476,10 +500,6 @@ class PinCodeLayout : LinearLayoutCompat {
 
     fun setDigitCallback(callback: PinCodeDigitsCallback) {
         this.callback = callback
-    }
-
-    fun setResetListener(resetListener: ResetPinListener) {
-        this.resetPinListener = resetListener
     }
 
     fun hideReset() {
@@ -729,6 +749,61 @@ class PinCodeLayout : LinearLayoutCompat {
             return
         }
         currentDotsFilled = length
+    }
+
+    fun getPressedColorRippleDrawable(normalColor: Int, pressedColor: Int): Drawable {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            RippleDrawable(
+                getPressedColorSelector(normalColor, pressedColor)!!,
+                getColorDrawableFromColor(normalColor),
+                null
+            )
+        } else {
+            return getStateListDrawable(normalColor, pressedColor)
+        }
+    }
+
+    fun getStateListDrawable(
+        normalColor: Int, pressedColor: Int
+    ): StateListDrawable {
+        val states = StateListDrawable()
+        states.addState(
+            intArrayOf(android.R.attr.state_pressed),
+            ColorDrawable(pressedColor)
+        )
+        states.addState(
+            intArrayOf(android.R.attr.state_focused),
+            ColorDrawable(pressedColor)
+        )
+        states.addState(
+            intArrayOf(android.R.attr.state_activated),
+            ColorDrawable(pressedColor)
+        )
+        states.addState(
+            intArrayOf(),
+            ColorDrawable(normalColor)
+        )
+        return states
+    }
+
+    fun getPressedColorSelector(normalColor: Int, pressedColor: Int): ColorStateList? {
+        return ColorStateList(
+            arrayOf(
+                intArrayOf(android.R.attr.state_pressed),
+                intArrayOf(android.R.attr.state_focused),
+                intArrayOf(android.R.attr.state_activated),
+                intArrayOf()
+            ), intArrayOf(
+                pressedColor,
+                pressedColor,
+                pressedColor,
+                normalColor
+            )
+        )
+    }
+
+    fun getColorDrawableFromColor(color: Int): ColorDrawable? {
+        return ColorDrawable(color)
     }
 
 }

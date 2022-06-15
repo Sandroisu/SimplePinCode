@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
 /**
- * A simple [Fragment] subclass as the default destination in the navigation.
+ * A ready-to-use pin code implementation. Subclass this, override abstract methods and you are ready to go.
  */
 abstract class PinCodeFragment : Fragment() {
 
@@ -38,7 +38,7 @@ abstract class PinCodeFragment : Fragment() {
                 pinCodeLayout?.fillDot(result.pinCode().length)
                 if (result.pinCode() == getSavedPinCode()) {
                     pinCodeLayout?.blockDigits()
-                    onCodeMatch(result as com.slatinin.simplepincode.ExistPinCodeResult)
+                    onCodeMatch(result as ExistPinCodeResult)
                 } else {
                     if (!result.continueEnter()) {
                         pinCodeLayout?.wrongClear()
@@ -66,7 +66,7 @@ abstract class PinCodeFragment : Fragment() {
                 pinCodeLayout?.hideReset()
             }
             pinCodeLayout?.setDigitCallback(object :
-                com.slatinin.simplepincode.PinCodeDigitsCallback {
+                PinCodeDigitsCallback {
                 override fun onDigitEntered(digit: String) {
                     refreshPinObserver?.let {
                         viewM.refreshPinCode(digit).observe(viewLifecycleOwner, it)
@@ -101,7 +101,7 @@ abstract class PinCodeFragment : Fragment() {
                 pinCodeLayout?.wrongClear()
                 return
             }
-            onNewCodeMatch(result as com.slatinin.simplepincode.NewPinCodeResult)
+            onNewCodeMatch(result as NewPinCodeResult)
         }
     }
 
@@ -116,9 +116,9 @@ abstract class PinCodeFragment : Fragment() {
 
     abstract fun getSavedPinCode(): String
 
-    abstract fun onCodeMatch(existPinCodeResult: com.slatinin.simplepincode.ExistPinCodeResult)
+    abstract fun onCodeMatch(existPinCodeResult: ExistPinCodeResult)
 
-    abstract fun onNewCodeMatch(newPinCodeResult: com.slatinin.simplepincode.NewPinCodeResult)
+    abstract fun onNewCodeMatch(newPinCodeResult: NewPinCodeResult)
 
     abstract fun codeResetConfirmed()
 

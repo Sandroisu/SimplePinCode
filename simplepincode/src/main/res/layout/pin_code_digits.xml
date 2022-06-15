@@ -4,7 +4,6 @@
     android:id="@+id/pin_code_parent_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent"
     android:orientation="vertical"
     android:paddingBottom="8dp">
 

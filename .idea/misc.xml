@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/a-slatinin/StudioProjects/SimplePinCode/simplepincode/src/main/res/drawable-v21/round_button_shape.xml" value="0.11" />
+        <entry key="..\:/Users/a-slatinin/StudioProjects/SimplePinCode/simplepincode/src/main/res/drawable/round_button_shape.xml" value="0.11" />
+        <entry key="..\:/Users/a-slatinin/StudioProjects/SimplePinCode/simplepincode/src/main/res/layout/fragment_pincode.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/a-slatinin/StudioProjects/SimplePinCode/simplepincode/src/main/res/layout/pin_code_digits.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/alex/AndroidStudioProjects/PinCode/app/src/main/res/layout/activity_main.xml" value="0.2971014492753623" />
         <entry key="..\:/Users/alex/AndroidStudioProjects/PinCode/simplepincode/src/main/res/drawable-v21/round_button_shape.xml" value="0.122" />
         <entry key="..\:/Users/alex/AndroidStudioProjects/PinCode/simplepincode/src/main/res/drawable/round_button_shape.xml" value="0.122" />
@@ -14,7 +18,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
