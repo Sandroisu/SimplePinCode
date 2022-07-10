@@ -10,7 +10,7 @@ You can use a ready-to-use implementation - for this you need to create a fragme
 - `abstract fun onNewCodeMatch(newPinCodeResult: NewPinCodeResult)` - this function is called if the user has entered an identical code again after the initial entry - creation mode, `isCreateNewCode()` returns true.
 - `abstract fun codeResetConfirmed()` - this function is called if the user confirmed code reset.
 - `abstract fun getMaxPinLength(): Int` - pin code length
-- 
+
 Another choice is to use a ready-made View - element - PinCodeLayout in which there are enough methods for customization (both through kotlin code and through xml):
 ```
 app:dotFilledIcon
