@@ -2,7 +2,11 @@
 
 
 This library implements a screen for entering an access code (pin code).
+For Android projects add:
+```
+    implementation 'io.github.sandroisu:simplepincode:1.0.0'
 
+```
 You can use a ready-to-use implementation - for this you need to create a fragment that inherits PinCodeFragment and implement its abstract methods:
 - `abstract fun isCreateNewCode(): Boolean` - to determine which mode you are in - creating a PIN code or entering an existing one
 - `abstract fun getSavedPinCode(): String` - to return a saved pin code(you can return empty string if in create mode). Note that string length suppose to be same as result of `getMaxPinLength()`
