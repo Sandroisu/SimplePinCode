@@ -4,7 +4,7 @@
 This library implements a screen for entering an access code (pin code).
 For Android projects add:
 ```
-    implementation 'io.github.sandroisu:simplepincode:1.0.0'
+    implementation 'io.github.sandroisu:simplepincode:1.0.1'
 
 ```
 You can use a ready-to-use implementation - for this you need to create a fragment that inherits PinCodeFragment and implement its abstract methods:
