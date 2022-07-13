@@ -1,5 +1,6 @@
 # Simple Pin Code
 
+FOR NOW LIBRARY IS NOT READY TO USE!
 
 This library implements a screen for entering an access code (pin code).
 For Android projects add:
